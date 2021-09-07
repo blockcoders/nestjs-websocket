@@ -311,7 +311,7 @@ describe('Websocket Decorators', () => {
   describe('@OnError', () => {
     for (const PlatformAdapter of platforms) {
       describe(PlatformAdapter.name, () => {
-        it('should listen a close event', async () => {
+        it('should listen a error event', async () => {
           @Injectable()
           class TestService {
             private errorMessage = '';
@@ -392,7 +392,14 @@ describe('Websocket Decorators', () => {
   describe('@OnMessage', () => {
     for (const PlatformAdapter of platforms) {
       describe(PlatformAdapter.name, () => {
-        it('should listen a close event', async () => {
+        it('should listen a message event', async () => {
+          const eventData = {
+            event: 'push',
+            data: {
+              test: 'test',
+            },
+          };
+
           @Injectable()
           class TestService {
             private data: Record<any, any> = {};
@@ -404,14 +411,7 @@ describe('Websocket Decorators', () => {
 
             @OnOpen()
             onOpen() {
-              this.ws.send(
-                JSON.stringify({
-                  event: 'push',
-                  data: {
-                    test: 'test',
-                  },
-                }),
-              );
+              this.ws.send(JSON.stringify(eventData));
             }
 
             @OnMessage()
@@ -466,9 +466,11 @@ describe('Websocket Decorators', () => {
             .get('/')
             .expect(200)
             .expect((res) => {
-              // console.log(res.body);
-              // expect(res.body).toBeDefined();
-              // expect(res.body.url).toEqual(`ws://localhost:${port}`);
+              expect(res.body).toBeDefined();
+              expect(res.body).toMatchObject({
+                event: 'pop',
+                data: eventData.data,
+              });
             });
 
           await app.close();
