@@ -1,0 +1,14 @@
+__tests__/
+.github/
+coverage/
+*.tsbuildinfo
+*.js.map
+src/
+.eslintrc.js
+.gitignore
+.prettierrc
+.travis.yml
+nest-cli.json
+tsconfig.build.json
+tsconfig.json
+.circleci/
