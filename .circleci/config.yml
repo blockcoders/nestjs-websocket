@@ -16,6 +16,7 @@ jobs:
         type: string
     docker:
       - image: circleci/node:<< parameters.node-version >>
+    parallelism: 3
     resource_class: small
     steps:
       - checkout
