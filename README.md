@@ -6,7 +6,7 @@
 [![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/nestjs-websocket)](https://snyk.io/test/github/blockcoders/nestjs-websocket)
 [![supported platforms](https://img.shields.io/badge/platforms-Express%20%26%20Fastify-green)](https://img.shields.io/badge/platforms-Express%20%26%20Fastify-green)
 
-Websocket Client utility for NestJS based on [ws](https://www.npmjs.com/package/ws)
+Websocket Client for NestJS based on [ws](https://www.npmjs.com/package/ws)
 
 ## Install
 
