@@ -1,6 +1,6 @@
 {
   "name": "nestjs-websocket",
-  "version": "0.1.0-beta.5",
+  "version": "0.1.0",
   "description": "",
   "author": "Blockcoders Engineering <hello@blockcoders.io>",
   "license": "Apache",
