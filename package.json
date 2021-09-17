@@ -1,6 +1,6 @@
 {
   "name": "nestjs-websocket",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.5",
   "description": "",
   "author": "Blockcoders Engineering <hello@blockcoders.io>",
   "license": "Apache",
@@ -23,7 +23,8 @@
     "prepublishOnly": "npm run lint:ci"
   },
   "precommit": [
-    "lint:ci"
+    "lint:ci",
+    "test:cov"
   ],
   "keywords": [
     "ws",
