@@ -1,3 +1,3 @@
-import * as WebSocketClient from 'ws';
+import * as WebSocketClient from 'ws'
 
-export { WebSocketClient };
+export { WebSocketClient }

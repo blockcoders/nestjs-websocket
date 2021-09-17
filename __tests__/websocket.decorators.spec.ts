@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { Module, Controller, Get, Injectable } from '@nestjs/common';
-import * as request from 'supertest';
-import { platforms } from './utils/platforms';
-import { extraWait } from './utils/extraWait';
+import { NestFactory } from '@nestjs/core'
+import { Module, Controller, Get, Injectable } from '@nestjs/common'
+import * as request from 'supertest'
+import { platforms } from './utils/platforms'
+import { extraWait } from './utils/extraWait'
 import {
   EventListener,
   InjectWebSocketProvider,
@@ -12,16 +12,16 @@ import {
   OnOpen,
   WebSocketClient,
   WebSocketModule,
-} from '../src';
-import { createGatewayApp } from './utils/createGatewayApp';
-import { randomPort } from './utils/randomPort';
+} from '../src'
+import { createGatewayApp } from './utils/createGatewayApp'
+import { randomPort } from './utils/randomPort'
 
 describe('Websocket Decorators', () => {
-  let port: number;
+  let port: number
 
   beforeEach(() => {
-    port = randomPort();
-  });
+    port = randomPort()
+  })
 
   describe('@InjectWebSocketProvider', () => {
     for (const PlatformAdapter of platforms) {
@@ -34,7 +34,7 @@ describe('Websocket Decorators', () => {
               private readonly ws: WebSocketClient,
             ) {}
             async someMethod(): Promise<number> {
-              return this.ws.readyState;
+              return this.ws.readyState
             }
           }
 
@@ -43,9 +43,9 @@ describe('Websocket Decorators', () => {
             constructor(private readonly service: TestService) {}
             @Get()
             async get(): Promise<{ status: number }> {
-              const status = await this.service.someMethod();
+              const status = await this.service.someMethod()
 
-              return { status };
+              return { status }
             }
           }
 
@@ -60,35 +60,31 @@ describe('Websocket Decorators', () => {
           })
           class TestModule {}
 
-          const appGateway = await createGatewayApp();
-          await appGateway.listen(port);
-          const app = await NestFactory.create(
-            TestModule,
-            new PlatformAdapter(),
-            { logger: false },
-          );
-          const server = app.getHttpServer();
+          const appGateway = await createGatewayApp()
+          await appGateway.listen(port)
+          const app = await NestFactory.create(TestModule, new PlatformAdapter(), { logger: false })
+          const server = app.getHttpServer()
 
-          await app.init();
-          await extraWait(PlatformAdapter, app);
+          await app.init()
+          await extraWait(PlatformAdapter, app)
 
           // open websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           await request(server)
             .get('/')
             .expect(200)
             .expect((res) => {
-              expect(res.body).toBeDefined();
-              expect(res.body.status).toEqual(WebSocketClient.OPEN);
-            });
+              expect(res.body).toBeDefined()
+              expect(res.body.status).toEqual(WebSocketClient.OPEN)
+            })
 
-          await app.close();
-          await appGateway.close();
-        });
-      });
+          await app.close()
+          await appGateway.close()
+        })
+      })
     }
-  });
+  })
 
   describe('@EventListener', () => {
     for (const PlatformAdapter of platforms) {
@@ -96,15 +92,15 @@ describe('Websocket Decorators', () => {
         it('should listen a websocket event', async () => {
           @Injectable()
           class TestService {
-            private wsOpen = false;
+            private wsOpen = false
 
             @EventListener('open')
             onOpen() {
-              this.wsOpen = true;
+              this.wsOpen = true
             }
 
             async isOpen(): Promise<boolean> {
-              return this.wsOpen;
+              return this.wsOpen
             }
           }
 
@@ -114,9 +110,9 @@ describe('Websocket Decorators', () => {
 
             @Get()
             async get(): Promise<{ open: boolean }> {
-              const open = await this.testService.isOpen();
+              const open = await this.testService.isOpen()
 
-              return { open };
+              return { open }
             }
           }
 
@@ -131,35 +127,31 @@ describe('Websocket Decorators', () => {
           })
           class TestModule {}
 
-          const appGateway = await createGatewayApp();
-          await appGateway.listen(port);
-          const app = await NestFactory.create(
-            TestModule,
-            new PlatformAdapter(),
-            { logger: false },
-          );
-          const server = app.getHttpServer();
+          const appGateway = await createGatewayApp()
+          await appGateway.listen(port)
+          const app = await NestFactory.create(TestModule, new PlatformAdapter(), { logger: false })
+          const server = app.getHttpServer()
 
-          await app.init();
-          await extraWait(PlatformAdapter, app);
+          await app.init()
+          await extraWait(PlatformAdapter, app)
 
           // open websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           await request(server)
             .get('/')
             .expect(200)
             .expect((res) => {
-              expect(res.body).toBeDefined();
-              expect(res.body.open).toBeTruthy();
-            });
+              expect(res.body).toBeDefined()
+              expect(res.body.open).toBeTruthy()
+            })
 
-          await app.close();
-          await appGateway.close();
-        });
-      });
+          await app.close()
+          await appGateway.close()
+        })
+      })
     }
-  });
+  })
 
   describe('@OnOpen', () => {
     for (const PlatformAdapter of platforms) {
@@ -167,15 +159,15 @@ describe('Websocket Decorators', () => {
         it('should listen a open event', async () => {
           @Injectable()
           class TestService {
-            private wsOpen = false;
+            private wsOpen = false
 
             @OnOpen()
             onOpen() {
-              this.wsOpen = true;
+              this.wsOpen = true
             }
 
             async isOpen(): Promise<boolean> {
-              return this.wsOpen;
+              return this.wsOpen
             }
           }
 
@@ -185,9 +177,9 @@ describe('Websocket Decorators', () => {
 
             @Get()
             async get(): Promise<{ open: boolean }> {
-              const open = await this.testService.isOpen();
+              const open = await this.testService.isOpen()
 
-              return { open };
+              return { open }
             }
           }
 
@@ -202,35 +194,31 @@ describe('Websocket Decorators', () => {
           })
           class TestModule {}
 
-          const appGateway = await createGatewayApp();
-          await appGateway.listen(port);
-          const app = await NestFactory.create(
-            TestModule,
-            new PlatformAdapter(),
-            { logger: false },
-          );
-          const server = app.getHttpServer();
+          const appGateway = await createGatewayApp()
+          await appGateway.listen(port)
+          const app = await NestFactory.create(TestModule, new PlatformAdapter(), { logger: false })
+          const server = app.getHttpServer()
 
-          await app.init();
-          await extraWait(PlatformAdapter, app);
+          await app.init()
+          await extraWait(PlatformAdapter, app)
 
           // open websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           await request(server)
             .get('/')
             .expect(200)
             .expect((res) => {
-              expect(res.body).toBeDefined();
-              expect(res.body.open).toBeTruthy();
-            });
+              expect(res.body).toBeDefined()
+              expect(res.body.open).toBeTruthy()
+            })
 
-          await app.close();
-          await appGateway.close();
-        });
-      });
+          await app.close()
+          await appGateway.close()
+        })
+      })
     }
-  });
+  })
 
   describe('@OnClose', () => {
     for (const PlatformAdapter of platforms) {
@@ -238,15 +226,15 @@ describe('Websocket Decorators', () => {
         it('should listen a close event', async () => {
           @Injectable()
           class TestService {
-            private wsClose = false;
+            private wsClose = false
 
             @OnClose()
             close() {
-              this.wsClose = true;
+              this.wsClose = true
             }
 
             async isClose(): Promise<boolean> {
-              return this.wsClose;
+              return this.wsClose
             }
           }
 
@@ -256,9 +244,9 @@ describe('Websocket Decorators', () => {
 
             @Get()
             async get(): Promise<{ close: boolean }> {
-              const close = await this.testService.isClose();
+              const close = await this.testService.isClose()
 
-              return { close };
+              return { close }
             }
           }
 
@@ -273,40 +261,36 @@ describe('Websocket Decorators', () => {
           })
           class TestModule {}
 
-          const appGateway = await createGatewayApp();
-          await appGateway.listen(port);
-          const app = await NestFactory.create(
-            TestModule,
-            new PlatformAdapter(),
-            { logger: false },
-          );
-          const server = app.getHttpServer();
+          const appGateway = await createGatewayApp()
+          await appGateway.listen(port)
+          const app = await NestFactory.create(TestModule, new PlatformAdapter(), { logger: false })
+          const server = app.getHttpServer()
 
-          await app.init();
-          await extraWait(PlatformAdapter, app);
+          await app.init()
+          await extraWait(PlatformAdapter, app)
 
           // open websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           // close the gateway
-          await appGateway.close();
+          await appGateway.close()
 
           // close websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           await request(server)
             .get('/')
             .expect(200)
             .expect((res) => {
-              expect(res.body).toBeDefined();
-              expect(res.body.close).toBeTruthy();
-            });
+              expect(res.body).toBeDefined()
+              expect(res.body.close).toBeTruthy()
+            })
 
-          await app.close();
-        });
-      });
+          await app.close()
+        })
+      })
     }
-  });
+  })
 
   describe('@OnError', () => {
     for (const PlatformAdapter of platforms) {
@@ -314,7 +298,7 @@ describe('Websocket Decorators', () => {
         it('should listen a error event', async () => {
           @Injectable()
           class TestService {
-            private errorMessage = '';
+            private errorMessage = ''
 
             constructor(
               @InjectWebSocketProvider()
@@ -323,16 +307,16 @@ describe('Websocket Decorators', () => {
 
             @OnOpen()
             onOpen() {
-              this.ws.emit('error', new Error('error occured'));
+              this.ws.emit('error', new Error('error occured'))
             }
 
             @OnError()
             error(err: Error) {
-              this.errorMessage = err.message;
+              this.errorMessage = err.message
             }
 
             async getError(): Promise<string> {
-              return this.errorMessage;
+              return this.errorMessage
             }
           }
 
@@ -342,9 +326,9 @@ describe('Websocket Decorators', () => {
 
             @Get()
             async get(): Promise<{ message: string }> {
-              const message = await this.testService.getError();
+              const message = await this.testService.getError()
 
-              return { message };
+              return { message }
             }
           }
 
@@ -359,35 +343,31 @@ describe('Websocket Decorators', () => {
           })
           class TestModule {}
 
-          const appGateway = await createGatewayApp();
-          await appGateway.listen(port);
-          const app = await NestFactory.create(
-            TestModule,
-            new PlatformAdapter(),
-            { logger: false },
-          );
-          const server = app.getHttpServer();
+          const appGateway = await createGatewayApp()
+          await appGateway.listen(port)
+          const app = await NestFactory.create(TestModule, new PlatformAdapter(), { logger: false })
+          const server = app.getHttpServer()
 
-          await app.init();
-          await extraWait(PlatformAdapter, app);
+          await app.init()
+          await extraWait(PlatformAdapter, app)
 
           // open websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           await request(server)
             .get('/')
             .expect(200)
             .expect((res) => {
-              expect(res.body).toBeDefined();
-              expect(res.body.message).toEqual('error occured');
-            });
+              expect(res.body).toBeDefined()
+              expect(res.body.message).toEqual('error occured')
+            })
 
-          await app.close();
-          await appGateway.close();
-        });
-      });
+          await app.close()
+          await appGateway.close()
+        })
+      })
     }
-  });
+  })
 
   describe('@OnMessage', () => {
     for (const PlatformAdapter of platforms) {
@@ -398,11 +378,11 @@ describe('Websocket Decorators', () => {
             data: {
               test: 'test',
             },
-          };
+          }
 
           @Injectable()
           class TestService {
-            private data: Record<any, any> = {};
+            private data: Record<any, any> = {}
 
             constructor(
               @InjectWebSocketProvider()
@@ -411,16 +391,16 @@ describe('Websocket Decorators', () => {
 
             @OnOpen()
             onOpen() {
-              this.ws.send(JSON.stringify(eventData));
+              this.ws.send(JSON.stringify(eventData))
             }
 
             @OnMessage()
             message(data: WebSocketClient.Data) {
-              this.data = JSON.parse(data.toString());
+              this.data = JSON.parse(data.toString())
             }
 
             async getData(): Promise<Record<any, any>> {
-              return this.data;
+              return this.data
             }
           }
 
@@ -430,9 +410,9 @@ describe('Websocket Decorators', () => {
 
             @Get()
             async get(): Promise<Record<any, any>> {
-              const data = await this.testService.getData();
+              const data = await this.testService.getData()
 
-              return data;
+              return data
             }
           }
 
@@ -447,36 +427,32 @@ describe('Websocket Decorators', () => {
           })
           class TestModule {}
 
-          const appGateway = await createGatewayApp();
-          await appGateway.listen(port);
-          const app = await NestFactory.create(
-            TestModule,
-            new PlatformAdapter(),
-            { logger: false },
-          );
-          const server = app.getHttpServer();
+          const appGateway = await createGatewayApp()
+          await appGateway.listen(port)
+          const app = await NestFactory.create(TestModule, new PlatformAdapter(), { logger: false })
+          const server = app.getHttpServer()
 
-          await app.init();
-          await extraWait(PlatformAdapter, app);
+          await app.init()
+          await extraWait(PlatformAdapter, app)
 
           // open websockets delay
-          await new Promise((res) => setTimeout(res, 800));
+          await new Promise((res) => setTimeout(res, 800))
 
           await request(server)
             .get('/')
             .expect(200)
             .expect((res) => {
-              expect(res.body).toBeDefined();
+              expect(res.body).toBeDefined()
               expect(res.body).toMatchObject({
                 event: 'pop',
                 data: eventData.data,
-              });
-            });
+              })
+            })
 
-          await app.close();
-          await appGateway.close();
-        });
-      });
+          await app.close()
+          await appGateway.close()
+        })
+      })
     }
-  });
-});
+  })
+})

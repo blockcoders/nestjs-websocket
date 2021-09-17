@@ -1,8 +1,4 @@
-import {
-  MessageBody,
-  SubscribeMessage,
-  WebSocketGateway,
-} from '@nestjs/websockets';
+import { MessageBody, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets'
 
 @WebSocketGateway()
 export class ApplicationGateway {
@@ -11,6 +7,6 @@ export class ApplicationGateway {
     return {
       event: 'pop',
       data,
-    };
+    }
   }
 }
