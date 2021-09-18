@@ -1,6 +1,6 @@
 {
   "name": "nestjs-websocket",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.1",
   "description": "",
   "author": "Blockcoders Engineering <hello@blockcoders.io>",
   "license": "Apache",
@@ -31,6 +31,9 @@
     "ws-client",
     "websocket",
     "websocket-client",
+    "websocket-protocol",
+    "websocket-library",
+    "websockets",
     "nestjs",
     "nest.js",
     "nest"
@@ -62,6 +65,7 @@
     "@types/ws": "^7.4.7",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
+    "axios": ">=0.21.2",
     "coveralls": "^3.1.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
