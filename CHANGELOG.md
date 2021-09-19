@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+Published by **[jarcodallo](https://github.com/jarcodallo)** on **2021/09/19**
+- [#3](https://github.com/blockcoders/nestjs-websocket/pull/2) Update keywords and deps
+
 ## 0.1.0
 Published by **[jarcodallo](https://github.com/jarcodallo)** on **2021/09/17**
 - [#2](https://github.com/blockcoders/nestjs-websocket/pull/2) Update README.md and linter config
