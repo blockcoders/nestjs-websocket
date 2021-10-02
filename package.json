@@ -1,7 +1,7 @@
 {
   "name": "nestjs-websocket",
-  "version": "0.1.1",
-  "description": "",
+  "version": "0.1.2",
+  "description": "Websocket Client for NestJS based on ws",
   "author": "Blockcoders Engineering <hello@blockcoders.io>",
   "license": "Apache",
   "readmeFilename": "README.md",
@@ -20,7 +20,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "report": "cat ./coverage/lcov.info | coveralls",
-    "prepublishOnly": "npm run lint:ci"
+    "prepublishOnly": "npm run lint:ci & npm run test:cov"
   },
   "precommit": [
     "lint:ci",
