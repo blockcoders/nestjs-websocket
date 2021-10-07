@@ -1,6 +1,6 @@
 import { ModuleMetadata } from '@nestjs/common'
 import { ClientRequestArgs } from 'http'
-import { ClientOptions, CloseEvent, ErrorEvent, MessageEvent, OpenEvent } from 'ws'
+import { ClientOptions } from 'ws'
 import { URL } from 'url'
 
 export interface WebSocketModuleOptions extends Record<string, any> {
@@ -17,5 +17,3 @@ export interface WebSocketModuleAsyncOptions extends Pick<ModuleMetadata, 'impor
 export interface WebSocketEventMetadata {
   event: string
 }
-
-export type EventDataType = OpenEvent | CloseEvent | ErrorEvent | MessageEvent
