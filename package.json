@@ -1,6 +1,6 @@
 {
   "name": "nestjs-websocket",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Websocket Client for NestJS based on ws",
   "author": "Blockcoders Engineering <hello@blockcoders.io>",
   "license": "Apache",

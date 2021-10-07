@@ -1,8 +1,16 @@
 # Changelog
 
+## 0.1.3
+Published by **[jarcodallo](https://github.com/jarcodallo)** on **2021/10/07**
+- [#4](https://github.com/blockcoders/nestjs-websocket/pull/4) fix types
+
+## 0.1.2
+Published by **[jarcodallo](https://github.com/jarcodallo)** on **2021/10/02**
+- Update dependencies
+
 ## 0.1.1
 Published by **[jarcodallo](https://github.com/jarcodallo)** on **2021/09/19**
-- [#3](https://github.com/blockcoders/nestjs-websocket/pull/2) Update keywords and deps
+- [#3](https://github.com/blockcoders/nestjs-websocket/pull/3) Update keywords and deps
 
 ## 0.1.0
 Published by **[jarcodallo](https://github.com/jarcodallo)** on **2021/09/17**
