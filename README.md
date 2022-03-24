@@ -319,7 +319,7 @@ Contributions welcome! See [Contributing](CONTRIBUTING.md).
 
 ## Authors
 
-- [**Jose Ramirez**](https://github.com/jarcodallo), [Twitter](https://twitter.com/jarcodallo), [NPM](https://www.npmjs.com/~jarcodallo)
+- [**Jose Ramirez**](https://github.com/0xslipk)
 - [**Ana Riera**](https://github.com/AnnRiera)
 
 ## License
