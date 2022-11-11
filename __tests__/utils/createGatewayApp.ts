@@ -7,7 +7,7 @@ export async function createGatewayApp(): Promise<INestApplication> {
   const testingModule = await Test.createTestingModule({
     providers: [ApplicationGateway],
   }).compile()
-  const app = await testingModule.createNestApplication()
+  const app = testingModule.createNestApplication()
 
   app.useWebSocketAdapter(new WsAdapter(app))
 

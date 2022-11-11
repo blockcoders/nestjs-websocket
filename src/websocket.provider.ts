@@ -5,7 +5,7 @@ import { Provider } from '@nestjs/common'
 import { defer, lastValueFrom } from 'rxjs'
 import { WEBSOCKET_PROVIDER_NAME, WEBSOCKET_MODULE_OPTIONS } from './websocket.constants'
 
-async function createWebSocket(_options: WebSocketModuleOptions): Promise<WebSocket> {
+export async function createWebSocket(_options: WebSocketModuleOptions): Promise<WebSocket> {
   try {
     const { url, protocols, options } = _options
     let ws: WebSocket

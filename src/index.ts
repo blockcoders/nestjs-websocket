@@ -3,3 +3,4 @@ export { InjectWebSocketProvider, EventListener, OnOpen, OnClose, OnError, OnMes
 export { WebSocketModuleOptions, WebSocketModuleAsyncOptions, WebSocketEventMetadata } from './websocket.interface'
 export { getWebSocketToken } from './websocket.utils'
 export { WebSocketClient } from './websocket.export'
+export { createWebSocket } from './websocket.provider'
