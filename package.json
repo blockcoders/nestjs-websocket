@@ -1,15 +1,15 @@
 {
   "name": "nestjs-websocket",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Websocket Client for NestJS based on ws",
   "author": "Blockcoders Engineering <hello@blockcoders.io> & Taraxa",
   "license": "Apache",
   "readmeFilename": "README.md",
-  "homepage": "https://github.com/blockcoders/nestjs-websocket/blob/main/README.md",
-  "bugs": "https://github.com/blockcoders/nestjs-websocket/issues",
+  "homepage": "https://github.com/Taraxa-project/nestjs-websocket/blob/main/README.md",
+  "bugs": "https://github.com/Taraxa-project/nestjs-websocket/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blockcoders/nestjs-websocket"
+    "url": "https://github.com/Taraxa-project/nestjs-websocket"
   },
   "main": "dist/index.js",
   "engineStrict": false,
